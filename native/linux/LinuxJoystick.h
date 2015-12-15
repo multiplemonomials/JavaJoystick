@@ -1,7 +1,3 @@
-#define JNIEXPORT
-#define JNIIMPORT
-#define JNICALL
-
 #include <jni.h>
 #include <assert.h>
 #include <stdio.h>

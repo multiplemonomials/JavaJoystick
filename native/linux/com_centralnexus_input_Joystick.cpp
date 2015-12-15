@@ -17,10 +17,6 @@ Copyright 2002 George Rhoten, Daniel Kristjansson and others.
 
 */
 
-#define JNIEXPORT
-#define JNIIMPORT
-#define JNICALL
-
 #include <assert.h>
 #include <stdio.h>
 #include <fcntl.h>

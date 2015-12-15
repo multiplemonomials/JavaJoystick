@@ -35,44 +35,31 @@ else()
 	set(NUM_BITS 32)
 endif()
 
+#Deal with Java's weird classpath prefix thing
+if(WIN32)
+	set(CLASSPATH_SEPARATOR ".;")
+else()
+	set(CLASSPATH_SEPARATOR ".:")
+endif()
+
 #for now, just install to the source directory
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
 
 #compile java to class files
 set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.7" "-target" "1.7")
-
 add_subdirectory(com/centralnexus)
 
-# generate jni stubs
 set (_stubDir "${CMAKE_CURRENT_BINARY_DIR}")
-add_custom_command(
-    OUTPUT com_centralnexus_input_Joystick.h
-    COMMAND ${Java_JAVAH_EXECUTABLE} -verbose
-        -classpath ${_classDir}
-        -d ${_stubDir}
-        -jni com.centralnexus.input.Joystick
-)
-	
-add_custom_command(
-OUTPUT com_centralnexus_input_ExtendedJoystick.h
-COMMAND ${Java_JAVAH_EXECUTABLE} -verbose
-	-classpath ${_classDir}
-	-d ${_stubDir}
-	-jni com.centralnexus.input.ExtendedJoystick
-)
+get_target_property(_jarFile JavaJoystick JAR_FILE)
+get_target_property(_classDir JavaJoystick CLASSDIR)
+
 
 # generate library
+add_subdirectory(native)
 
-if(WIN32)
-	add_subdirectory(win32)
-else()
-	add_subdirectory(linux)
-endif()
 # add test to run the test window
-# I have no idea how to get the location of the library files properly, so I just use the path in the intermediate folder.
-# There's probably a better way to do this.
-set(JAR_PATH "${CMAKE_BINARY_DIR}/com/centralnexus/JavaJoystick.jar")
+
 add_test(NAME TestJoystickWindow
     COMMAND ${Java_JAVA_EXECUTABLE} 
-	-Djava.library.path=${CMAKE_BINARY_DIR}/win32
-	-classpath ".;${JAR_PATH}" com.centralnexus.test.WindowTest -d:0.25 -d2:0.1 -i:60)
+	-Djava.library.path=${CMAKE_BINARY_DIR}/native
+	-classpath "${CLASSPATH_SEPARATOR}${_jarFile}" com.centralnexus.test.WindowTest -d:0.25 -d2:0.1 -i:60)

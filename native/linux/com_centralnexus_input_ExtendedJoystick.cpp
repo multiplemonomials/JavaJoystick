@@ -16,10 +16,6 @@ products derived from this software without specific prior written permission.
 Copyright 2002 George Rhoten, Daniel Kristjansson and others.
 
 */
-#define JNIEXPORT
-#define JNIIMPORT
-#define JNICALL
-
 #include "com_centralnexus_input_ExtendedJoystick.h"
 #include "LinuxJoystick.h"
 
