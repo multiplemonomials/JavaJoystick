@@ -85,7 +85,7 @@ When compiling on Linux you may need to specify where your
 Java C++ headers are located. You can specify the headers when
 building as arguments to `cmake`:
 ```
-cmake -DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include/linux JAVA_INCLUDE_PATH2=/usr/lib/jvm/java-8-oracle/include/linux JAVA_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include
+cmake -DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include/linux -DJAVA_INCLUDE_PATH2=/usr/lib/jvm/java-8-oracle/include/linux -DJAVA_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include
 ```
 
 ### Authors
