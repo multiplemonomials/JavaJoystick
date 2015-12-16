@@ -1,15 +1,13 @@
-docs\license.txt     - The license agreement that this product is released under
-docs\html\index.html - API documentation
-com\centralnexus\input - The Java source code
-lib\                 - *.DLL and *.LIB files that are needed by the API
-win32\               - Windows implementation of the API
-Joystick.jar         - Java Joystick Driver interface JAR file
-runTest.bat          - A demo program for the Java Joystick Driver
+`docs\license.txt`       - The license agreement that this product is released under
+`docs\html\index.html`   - API documentation
+`com\centralnexus\input` - The Java source code
+`lib\`                   - *.DLL and *.LIB files that are needed by the API
+`native\`                - C++ native code to access joysticks, for Windows and Linux
 
 A special thanks goes out to Ed Burns for giving me useful feedback.
 
-The files that you need for a Windows binary distribution is lib\jjstick.dll
-and Joystick.jar.  You must of course agree to the license included in this
+The files that you need to use this library in your project are in the releases section.
+You must of course agree to the license included in this
 distribution, which includes giving credit to the authors for the creation
 of this library.
 
@@ -17,10 +15,6 @@ Thank you for you interest in the library.
 George Rhoten (main author)
 
 ------------------------------------------
-
-lib\                 - *.so files that are needed by the API
-linux\               - Linux 2.4 implementation of the API
-runTest		     - shell script to test joystick driver
 
 Here is some information on getting your Linux Joystick working
 in Java.
@@ -79,9 +73,10 @@ This is for the WingMan USB gamepad (with 7 axes).
 
 When compiling on Linux you may need to specify where your
 Java C++ headers are located. You can specify the headers when
-using "make" by doing the following in the linux directory:
-
-make INCS="-I/usr/java/jdk1.3.1_01/include/ -I/usr/java/jdk1.3.1_01/include/linux/"
-
+building as arguments to `cmake`:
+```
+cmake -DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include/linux JAVA_INCLUDE_PATH2=/usr/lib/jvm/java-8-oracle/include/linux JAVA_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include
+```
 Daniel Kristjansson (linux port)
 George Rhoten (main author)
+Jamie Smith (cmake build system)
