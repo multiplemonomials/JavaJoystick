@@ -1,7 +1,11 @@
 `docs\license.txt`       - The license agreement that this product is released under
+
 `docs\html\index.html`   - API documentation
+
 `com\centralnexus\input` - The Java source code
+
 `lib\`                   - *.DLL and *.LIB files that are needed by the API
+
 `native\`                - C++ native code to access joysticks, for Windows and Linux
 
 A special thanks goes out to Ed Burns for giving me useful feedback.
@@ -34,18 +38,22 @@ module under the Joystick heading. Turning on traditional joysticks is
 similar, you just add Game Port support and then add the module for your
 particular joystick.
 
-ls -l /dev/js?    gives me
+`ls -l /dev/js?`    gives me
+
+```
 lrwxrwxrwx    1 root     root            9 Jun  8  2001 /dev/js0 -> input/js0
 lrwxrwxrwx    1 root     root            9 Jun  8  2001 /dev/js1 -> input/js1
 lrwxrwxrwx    1 root     root            9 Jun  8  2001 /dev/js2 -> input/js2
 lrwxrwxrwx    1 root     root            9 Jun  8  2001 /dev/js3 -> input/js3
+```
 
-ls -l dev/input/js?  gives me
+`ls -l dev/input/js?`  gives me
+```
 crw-------    1 danielk  root      13,   0 Mar 23  2001 /dev/input/js0
 crw-------    1 danielk  root      13,   1 Mar 23  2001 /dev/input/js1
 crw-------    1 danielk  root      13,   2 Mar 23  2001 /dev/input/js2
 crw-------    1 danielk  root      13,   3 Mar 23  2001 /dev/input/js3
-
+```
 The joydev module must be loaded for this API to find any joysticks.
 Depending on a variety of factors this may or may not be autoloaded
 when you plug in a joystick, if it isn't you must do a "modprobe joydev"
@@ -61,13 +69,15 @@ If you wanted everyone to be able to use the joystick the permissions
 should be crw-rw-rw, this may be the problem you're having since a lot
 of distributions have the joystick available to root only.
 
-lsmod   gives me
+`lsmod`  gives me
+```
 Module                  Size  Used by
 warrior                 1552   0  (unused)
 serio                   1024   0  [warrior]
 joydev                  5792   0  (unused)
 input                   3328   0  [warrior joydev]
 ... other stuff ...
+```
 
 This is for the WingMan USB gamepad (with 7 axes).
 
@@ -77,6 +87,8 @@ building as arguments to `cmake`:
 ```
 cmake -DJAVA_AWT_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include/linux JAVA_INCLUDE_PATH2=/usr/lib/jvm/java-8-oracle/include/linux JAVA_INCLUDE_PATH=/usr/lib/jvm/java-8-oracle/include
 ```
+
+### Authors
 Daniel Kristjansson (linux port)
 George Rhoten (main author)
 Jamie Smith (cmake build system)
